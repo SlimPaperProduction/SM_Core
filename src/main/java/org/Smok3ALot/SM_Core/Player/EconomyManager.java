@@ -1,10 +1,11 @@
 package org.Smok3ALot.SM_Core.Player;
 
 import net.milkbowl.vault.economy.Economy;
+import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class EconomyManager {
@@ -37,16 +38,20 @@ public class EconomyManager {
 
     public boolean withdraw(Player player, double amount) {
         if (!isAvailable()) return false;
-        if (economy.has(player, amount)) {
-            economy.withdrawPlayer(player, amount);
-            return true;
+
+        OfflinePlayer offline = player; // Player implementiert OfflinePlayer
+        if (economy.has(offline, amount)) {
+            EconomyResponse resp = economy.withdrawPlayer(offline, amount);
+            return resp.transactionSuccess();
         }
         return false;
     }
 
-    public void deposit(Player player, double amount) {
-        if (isAvailable()) {
-            economy.depositPlayer(player, amount);
-        }
+    public boolean deposit(Player player, double amount) {
+        if (!isAvailable()) return false;
+
+        OfflinePlayer offline = player;
+        EconomyResponse resp = economy.depositPlayer(offline, amount);
+        return resp.transactionSuccess();
     }
 }

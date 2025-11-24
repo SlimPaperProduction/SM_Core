@@ -1,5 +1,6 @@
 package org.Smok3ALot.SM_Core.Message;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -34,6 +35,16 @@ public class MessageManager {
             message = message.replace("%" + entry.getKey() + "%", entry.getValue());
         }
         player.sendMessage(formatMessage(module, message));
+    }
+
+    public void broadcast(String module, String message) {
+        // Nachricht an alle Spieler
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            send(player, module, message);
+        }
+
+        // Nachricht zusätzlich in die Konsole schreiben
+        core.getLogger().info(formatMessage(module, message));
     }
 
     // Formatierung

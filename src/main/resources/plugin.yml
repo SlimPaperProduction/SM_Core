@@ -5,3 +5,4 @@ api-version: '1.21'
 authors: [ Smok3ALot ]
 description: Smokings Core Plugin
 softdepend: [LuckPerms]
+depend: [Vault, Essentials]
