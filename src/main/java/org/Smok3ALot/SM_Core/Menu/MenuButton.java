@@ -20,6 +20,14 @@ public class MenuButton {
         this.action = action;
     }
 
+    public MenuButton(ItemStack item, String name, Consumer<Player> action) {
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(name);
+        item.setItemMeta(meta);
+        this.item = item;
+        this.action = action;
+    }
+
     public ItemStack getItem() {
         return item;
     }
