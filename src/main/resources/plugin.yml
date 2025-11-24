@@ -1,0 +1,7 @@
+name: SM_Core
+version: '1.0-SNAPSHOT'
+main: org.Smok3ALot.SM_Core.SM_Core
+api-version: '1.21'
+authors: [ Smok3ALot ]
+description: Smokings Core Plugin
+softdepend: [LuckPerms]
